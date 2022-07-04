@@ -10,7 +10,7 @@ using TheBugTracker.Data;
 namespace TheBugTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220703111952_Initial_001")]
+    [Migration("20220703202411_Initial_001")]
     partial class Initial_001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,18 @@ namespace TheBugTracker.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("AvatarContentType")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("AvatarFileData")
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("AvatarFileName")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")

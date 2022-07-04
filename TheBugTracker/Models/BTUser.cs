@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,25 @@ namespace TheBugTracker.Models
         }
 
 
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public IFormFile AvatarFormFile { get; set; }
+
+        [DisplayName("Avatar")]
+        public string AvatarFileName { get; set; }
+
+        public byte[] AvatarFileData { get; set; }
+
+        [DisplayName("File Extension")]
+        public string AvatarContentType { get; set; }
+
+        public int? CompanyId { get; set; }
+
+        //Navigation Properties
+
+        [NotMapped]
+        public Company Company { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
 
     }
