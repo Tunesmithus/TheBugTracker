@@ -42,10 +42,7 @@ namespace TheBugTracker.Models
         public Company Company { get; set; } 
         public ProjectPriority ProjectPriority { get; set; }
         public ICollection<BTUser> Members {get; set;}
-        public ICollection<Ticket> Tickets { get; set; }
-
-
-
+        public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
 
     }
 }

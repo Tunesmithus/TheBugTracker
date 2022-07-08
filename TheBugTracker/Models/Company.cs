@@ -19,8 +19,10 @@ namespace TheBugTracker.Models
 
         [NotMapped]
         public ICollection<BTUser> Members { get; set; }
-        public ICollection<BTUser> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
         //create relationship to invites
+        public ICollection<Invite> Invites { get; set; }
+
     }
 }

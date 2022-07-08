@@ -30,7 +30,6 @@ namespace TheBugTracker.Models
             }
         }
 
-
         [NotMapped]
         [DataType(DataType.Upload)]
         public IFormFile AvatarFormFile { get; set; }
@@ -47,7 +46,7 @@ namespace TheBugTracker.Models
 
         //Navigation Properties
 
-        [NotMapped]
+        
         public Company Company { get; set; }
         public ICollection<Project> Projects { get; set; }
 
