@@ -113,7 +113,7 @@ namespace TheBugTracker.Services
         {
             List<BTUser> developers = await GetProjectMembersByRoleAsync(projectId, Roles.Developer.ToString());
             List<BTUser> submitters = await GetProjectMembersByRoleAsync(projectId, Roles.Submitter.ToString());
-            List<BTUser> admin = await GetProjectMembersByRoleAsync(projectId, Roles.Administrator.ToString());
+            List<BTUser> admin = await GetProjectMembersByRoleAsync(projectId, Roles.Admin.ToString());
 
             List<BTUser> teamMembers = developers.Concat(submitters).Concat(admin).ToList();
 

@@ -23,7 +23,10 @@ namespace TheBugTracker.Models
 
         public string Description { get; set; }
 
+        [DisplayName("Start Date")]
         public DateTimeOffset StartDate { get; set; }
+
+        [DisplayName("End Date")]
         public DateTimeOffset? EndDate { get; set; }
 
         [DataType(DataType.Upload)]
@@ -33,8 +36,11 @@ namespace TheBugTracker.Models
 
         public string ImageFileName { get; set; }
 
+        [DisplayName("File Extension")]
+
         public string ImageContentType { get; set; }
 
+        [DisplayName("Archived")]
         public bool Archived { get; set; }
 
 

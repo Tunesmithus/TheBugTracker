@@ -343,7 +343,7 @@ namespace TheBugTracker.Services
 
             try
             {
-                if (role == Roles.Administrator.ToString())
+                if (role == Roles.Admin.ToString())
                 {
                     tickets = await GetAllTicketsByCompanyAsync(companyId);
                 }
@@ -380,7 +380,7 @@ namespace TheBugTracker.Services
             List<Ticket> tickets = new();
             try
             {
-                if (await _rolesService.IsUserInRoleAsync(user, Roles.Administrator.ToString()))
+                if (await _rolesService.IsUserInRoleAsync(user, Roles.Admin.ToString()))
                 {
                     tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(t => t.Tickets).ToList();
                 }
