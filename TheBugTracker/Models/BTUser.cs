@@ -42,7 +42,7 @@ namespace TheBugTracker.Models
         [DisplayName("File Extension")]
         public string AvatarContentType { get; set; }
 
-        public int? CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
         //Navigation Properties
 

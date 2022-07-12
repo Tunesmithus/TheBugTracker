@@ -6,17 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TheBugTracker.Data;
+using TheBugTracker.Extensions;
 using TheBugTracker.Models;
+using TheBugTracker.Models.Enums;
+using TheBugTracker.Models.ViewModels;
+using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
     public class TicketsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IBTTicketService _ticketService;
 
-        public TicketsController(ApplicationDbContext context)
+        public TicketsController(ApplicationDbContext context, IBTTicketService ticketService)
         {
             _context = context;
+            _ticketService = ticketService;
         }
 
         // GET: Tickets
@@ -51,8 +57,14 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Tickets/Create
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            AddTicketViewModel model = new();
+            
+            model.TicketPriorityList = new SelectList(await _ticketService.GetAllTicketsByPriorityAsync(companyId, model.Ticket.TicketPriorityId.ToString()), "Id", "Name");
+
             ViewData["DeveloperUserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["OwnerUserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");

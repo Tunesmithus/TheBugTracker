@@ -27,12 +27,14 @@ namespace TheBugTracker.Models
         public DateTimeOffset StartDate { get; set; }
 
         [DisplayName("End Date")]
-        public DateTimeOffset? EndDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
         [DataType(DataType.Upload)]
         [NotMapped]
-        public IFormFile FormFileImage { get; set; }
-        public byte[] FileData { get; set; }
+        public IFormFile ImageFormFile { get; set; }
+
+
+        public byte[] ImageFileData { get; set; }
 
         public string ImageFileName { get; set; }
 

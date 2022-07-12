@@ -27,7 +27,7 @@ namespace TheBugTracker.Services
         //CRUD - Create
         public async Task AddNewProjectAsync(Project project)
         {
-            _context.Add(project);
+            await _context.AddAsync(project);
             await _context.SaveChangesAsync();
         }
 
@@ -54,7 +54,7 @@ namespace TheBugTracker.Services
             //Add new Project Manager
             try
             {
-                await AddProjectManagerAsync(userId, projectId);
+                await AddUserToProjectAsync(userId, projectId);
                 return true;
             }
             catch (Exception ex)
@@ -103,9 +103,27 @@ namespace TheBugTracker.Services
         //Crud Archive Method (Soft Delete)
         public async Task ArchiveProjectAsync(Project project)
         {
-            project.Archived = true;
-            _context.Update(project);
-            await _context.SaveChangesAsync();
+            try
+            {
+                project.Archived = true;
+                await UpdateProjectAsync(project);
+
+                //Archive the Tickets for the project
+                foreach (Ticket ticket in project.Tickets)
+                {
+                    ticket.ArchivedByProject = true;
+                    _context.Update(ticket);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+
+            
 
         }
 
@@ -124,30 +142,40 @@ namespace TheBugTracker.Services
         {
 
             List<Project> projects = new();
-            projects = await _context.Projects.Where(p => p.CompanyId == companyId && p.Archived == false)
-                                            .Include(p => p.Members)
-                                            .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.Comments)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.Attachments)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.History)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.Notifications)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.DeveloperUser)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.OwnerUser)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.TicketStatus)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.TicketPriority)
-                                             .Include(p => p.Tickets)
-                                                .ThenInclude(t => t.TicketType)
-                                            .Include(p => p.ProjectPriority)
-                                            .ToListAsync();
+            try
+            {
+                projects = await _context.Projects.Where(p => p.CompanyId == companyId && p.Archived == false)
+                                                    .Include(p => p.Members)
+                                                    .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Comments)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Attachments)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.History)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Notifications)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.DeveloperUser)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.OwnerUser)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketStatus)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketPriority)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketType)
+                                                    .Include(p => p.ProjectPriority)
 
-            return projects;
+
+                                                    .ToListAsync();
+
+                return projects;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 
 
@@ -165,9 +193,41 @@ namespace TheBugTracker.Services
 
         public async Task<List<Project>> GetArchivedProjectsByCompany(int companyId)
         {
-            List<Project> projects = await GetAllProjectsByCompany(companyId);
+            try
+            {
+                List<Project> projects = await _context.Projects.Where(p => p.CompanyId == companyId && p.Archived == true)
+                                                    .Include(p => p.Members)
+                                                    .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Comments)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Attachments)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.History)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.Notifications)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.DeveloperUser)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.OwnerUser)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketStatus)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketPriority)
+                                                     .Include(p => p.Tickets)
+                                                        .ThenInclude(t => t.TicketType)
+                                                    .Include(p => p.ProjectPriority)
+                                                    .Include(c => c.Company)
 
-            return projects.Where(p => p.Archived == true).ToList();
+
+                                                    .ToListAsync();
+
+                return projects;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<List<BTUser>> GetDevelopersOnProjectAsync(int projectId)
@@ -179,6 +239,15 @@ namespace TheBugTracker.Services
         {
             Project project = await _context.Projects
                                             .Include(t => t.Tickets)
+                                                .ThenInclude(t=>t.TicketPriority)
+                                            .Include(t => t.Tickets)
+                                                .ThenInclude(t => t.TicketStatus)
+                                            .Include(t => t.Tickets)
+                                                .ThenInclude(t => t.TicketType)
+                                            .Include(t => t.Tickets)
+                                                .ThenInclude(t => t.DeveloperUser)
+                                            .Include(t => t.Tickets)
+                                                .ThenInclude(t => t.OwnerUser)
                                             .Include(m => m.Members)
                                             .Include(p => p.ProjectPriority)
                                             .FirstOrDefaultAsync(p => p.Id == projectId && p.CompanyId == companyId);
@@ -252,6 +321,8 @@ namespace TheBugTracker.Services
                     .Include(u => u.Projects)
                         .ThenInclude(t => t.Tickets)
                             .ThenInclude(t => t.TicketType)
+                    .Include(u =>u.Projects)
+                        .ThenInclude(p => p.ProjectPriority)
                     .FirstOrDefaultAsync(u => u.Id == userId)).Projects.ToList();
 
                 return userProjects;
@@ -373,6 +444,28 @@ namespace TheBugTracker.Services
                 throw;
             }
             
+        }
+
+        public async Task RestoreProjectAsync(Project project)
+        {
+            try
+            {
+                project.Archived = false;
+                await UpdateProjectAsync(project);
+
+                //Archive the Tickets for the Project
+                foreach (Ticket ticket in project.Tickets)
+                {
+                    ticket.ArchivedByProject = false;
+                    _context.Update(ticket);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
