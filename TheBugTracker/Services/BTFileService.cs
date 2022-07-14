@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TheBugTracker.Services.Interfaces;
 
-namespace TheBugTracker.Services.Interfaces
+namespace TheBugTracker.Services
 {
     public class BTFileService : IBTFileService
     {
@@ -70,7 +71,7 @@ namespace TheBugTracker.Services.Interfaces
             if (!string.IsNullOrWhiteSpace(file))
             {
                 fileImage = Path.GetExtension(file).Replace(".", "");
-                return $"/img/png/{fileImage}.png";
+                return $"/img/contenttype/{fileImage}.png";
             }
 
             return fileImage;

@@ -34,7 +34,11 @@ namespace TheBugTracker.Services.Interfaces
 
          Task<List<BTUser>> GetSubmittersOnProjectAsync(int projectId);
 
+        Task<List<Project>> GetUnassignedProjectsAsync(int companyId);
+
          Task<List<BTUser>> GetUsersNotOnProjectAsync(int projectId, int companyId);
+
+        Task<bool> IsAssignedProjectManagerAsync(string userId, int projectId);
 
          Task<List<Project>> GetUserProjectsAsync(string userId);
 
@@ -51,5 +55,7 @@ namespace TheBugTracker.Services.Interfaces
         Task RestoreProjectAsync(Project project);
 
         Task UpdateProjectAsync(Project project);
+
+        
     }
 }

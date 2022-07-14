@@ -295,6 +295,36 @@ namespace TheBugTracker.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Project>> GetUnassignedProjectsAsync(int companyId)
+        {
+            List<Project> result = new();
+
+            List<Project> projects = new();
+
+            try
+            {
+                projects = await _context.Projects.Include(p => p.ProjectPriority)
+                                                    .Where(p => p.CompanyId == companyId).ToListAsync();
+
+                foreach (Project project in projects)
+                {
+                    if ((await GetProjectMembersByRoleAsync(project.Id, Roles.ProjectManager.ToString())).Count==0)
+                    {
+                        result.Add(project);
+                    }
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return result;
+        }
+
         public async Task<List<Project>> GetUserProjectsAsync(string userId)
         {
             try
@@ -339,6 +369,27 @@ namespace TheBugTracker.Services
             List<BTUser> users = await _context.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToListAsync();
 
             return users.Where(u => u.CompanyId == companyId).ToList();
+        }
+
+        public async Task<bool> IsAssignedProjectManagerAsync(string userId, int projectId)
+        {
+            try
+            {
+                string projectManagerId = (await GetProjectManagerAsync(projectId))?.Id;
+                if (projectManagerId == userId)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            };
         }
 
         public async Task<bool> IsUserOnProjectAsync(string userId, int projectId)

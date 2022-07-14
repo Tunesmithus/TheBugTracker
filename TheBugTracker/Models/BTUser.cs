@@ -46,10 +46,8 @@ namespace TheBugTracker.Models
 
         //Navigation Properties
 
-        
         public Company Company { get; set; }
         public ICollection<Project> Projects { get; set; }
-
 
     }
 }

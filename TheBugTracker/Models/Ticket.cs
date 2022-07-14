@@ -46,11 +46,12 @@ namespace TheBugTracker.Models
         public int TicketStatusId { get; set; }
 
         [DisplayName("Ticket Owner")]
+
         public string OwnerUserId { get; set; }
 
         [DisplayName("Ticket Developer")]
-        public string DeveloperUserId { get; set; }
 
+        public string DeveloperUserId { get; set; }
 
         //Navigation Properties
 
@@ -58,6 +59,8 @@ namespace TheBugTracker.Models
         public virtual TicketStatus TicketStatus { get; set; }
         public virtual TicketPriority TicketPriority { get; set; }
         public virtual TicketType TicketType { get; set; }
+
+        
         public virtual BTUser OwnerUser { get; set; }
         public virtual BTUser DeveloperUser { get; set; }
 
