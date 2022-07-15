@@ -29,7 +29,9 @@ namespace TheBugTracker.Services.Interfaces
          Task<List<Ticket>> GetProjectTicketsByPriorityAsync(string priorityName, int companyId, int projectId);
          Task<List<Ticket>> GetProjectTicketsByTypeAsync(string typeName, int companyId, int projectId);
 
-        Task<List<Ticket>> GetUnassignedTicketsAsync(int companyId);
+        Task<Ticket> GetTicketAsNoTrackingAsync(int ticketId);
+
+         Task<List<Ticket>> GetUnassignedTicketsAsync(int companyId);
 
          Task AddTicketCommentAsync(TicketComment ticketComment);
          Task AddTicketAttachmentAsync(TicketAttachment ticketAttachment);

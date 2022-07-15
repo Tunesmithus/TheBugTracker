@@ -154,9 +154,27 @@ namespace TheBugTracker.Controllers
         {
             if (model.SelectedUsers != null)
             {
+                List<string> memberIds = (await _projectService.GetAllProjectMembersExceptPMAsync(model.Project.Id))
+                                                               .Select(m => m.Id).ToList();
 
+                //Remove current members
+                foreach (string member in memberIds)
+                {
+                    await _projectService.RemoveUserFromProjectAsync(member, model.Project.Id);
+                }
+
+                //Add selected members
+                foreach (string member in model.SelectedUsers)
+                {
+                    await _projectService.AddUserToProjectAsync(member, model.Project.Id);
+                }
+                
+                //goto project details
+                return RedirectToAction("Details", "Projects", new {id = model.Project.Id});
+                
             }
-            return View();
+
+            return RedirectToAction(nameof(AssignMembers), new { id = model.Project.Id });
         }
 
         // GET: Projects/Details/5

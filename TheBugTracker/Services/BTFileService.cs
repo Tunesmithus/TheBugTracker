@@ -60,7 +60,7 @@ namespace TheBugTracker.Services
                 fileSize /= bytes;
                 counter++;
             }
-            return string.Format("{0:n1{1}", fileSize, suffixes[counter]);
+            return string.Format("{0:N1}", fileSize, suffixes[counter]);
 
 
         }

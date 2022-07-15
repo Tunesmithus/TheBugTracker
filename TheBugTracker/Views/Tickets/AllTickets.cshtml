@@ -88,9 +88,12 @@
                 @Html.DisplayFor(modelItem => item.TicketType.Name)
             </td>
             <td>
+                @*@Html.DisplayFor(modelItem => item.OwnerUser.FullName)*@
                 @item.OwnerUser?.FullName
             </td>
             <td>
+                @*@Html.DisplayFor(modelItem => item.OwnerUser.FullName)*@
+
                 @item.DeveloperUser?.FullName
             </td>
             <td>

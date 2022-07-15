@@ -29,7 +29,7 @@ namespace TheBugTracker.Services
         {
             try
             {
-                _context.Add(ticket);
+                await _context.AddAsync(ticket);
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
@@ -70,7 +70,7 @@ namespace TheBugTracker.Services
                                                 .Include(t=>t.TicketStatus)
                                                 .Include(t =>t.TicketType)
                                                 .Include(t => t.Comments)
-                                                .Include(t => t.Attachments)
+                                                .Include(t=>t.Attachments)
                                                 .Include(t => t.History)
                                                 .FirstOrDefaultAsync(t => t.Id == ticketId);
                 return ticket;
@@ -517,6 +517,27 @@ namespace TheBugTracker.Services
             {
                 tickets = (await GetAllTicketsByCompanyAsync(companyId)).Where(t => string.IsNullOrEmpty(t.DeveloperUserId)).ToList();
                 return tickets;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<Ticket> GetTicketAsNoTrackingAsync(int ticketId)
+        {
+            try
+            {
+                return await _context.Tickets
+                                    .Include(t => t.DeveloperUser)
+                                    .Include(t => t.Project)
+                                    .Include(t => t.TicketPriority)
+                                    .Include(t => t.TicketStatus)
+                                    .Include(t => t.TicketType)
+                                    .Include(t => t.Comments)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(t => t.Id == ticketId);
             }
             catch (Exception)
             {
