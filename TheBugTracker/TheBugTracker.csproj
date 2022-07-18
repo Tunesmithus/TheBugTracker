@@ -9,6 +9,75 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\ProjectPriorities\**" />
+	  <Compile Remove="Views\TicketAttachments\**" />
+	  <Compile Remove="Views\TicketComments\**" />
+	  <Compile Remove="Views\TicketHistories\**" />
+	  <Compile Remove="Views\TicketPriorities\**" />
+	  <Compile Remove="Views\TicketStatus\**" />
+	  <Compile Remove="Views\TicketTypes\**" />
+	  <Compile Remove="wwwroot\assets\**" />
+	  <Content Remove="Views\ProjectPriorities\**" />
+	  <Content Remove="Views\TicketAttachments\**" />
+	  <Content Remove="Views\TicketComments\**" />
+	  <Content Remove="Views\TicketHistories\**" />
+	  <Content Remove="Views\TicketPriorities\**" />
+	  <Content Remove="Views\TicketStatus\**" />
+	  <Content Remove="Views\TicketTypes\**" />
+	  <Content Remove="wwwroot\assets\**" />
+	  <EmbeddedResource Remove="Views\ProjectPriorities\**" />
+	  <EmbeddedResource Remove="Views\TicketAttachments\**" />
+	  <EmbeddedResource Remove="Views\TicketComments\**" />
+	  <EmbeddedResource Remove="Views\TicketHistories\**" />
+	  <EmbeddedResource Remove="Views\TicketPriorities\**" />
+	  <EmbeddedResource Remove="Views\TicketStatus\**" />
+	  <EmbeddedResource Remove="Views\TicketTypes\**" />
+	  <EmbeddedResource Remove="wwwroot\assets\**" />
+	  <None Remove="Views\ProjectPriorities\**" />
+	  <None Remove="Views\TicketAttachments\**" />
+	  <None Remove="Views\TicketComments\**" />
+	  <None Remove="Views\TicketHistories\**" />
+	  <None Remove="Views\TicketPriorities\**" />
+	  <None Remove="Views\TicketStatus\**" />
+	  <None Remove="Views\TicketTypes\**" />
+	  <None Remove="wwwroot\assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Controllers\ProjectPrioritiesController.cs" />
+	  <Compile Remove="Controllers\TicketAttachmentsController.cs" />
+	  <Compile Remove="Controllers\TicketCommentsController.cs" />
+	  <Compile Remove="Controllers\TicketHistoriesController.cs" />
+	  <Compile Remove="Controllers\TicketPrioritiesController.cs" />
+	  <Compile Remove="Controllers\TicketStatusController.cs" />
+	  <Compile Remove="Controllers\TicketTypesController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\charts\chart-defaults.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-area-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-area-smooth-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-bar-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-bar-grouped-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-bar-grouped-horizontal-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-bar-horizontal-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-doughnut-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-line-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-line-smooth-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\chart-pie-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\dashboard-chart-area-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\dashboard-chart-area-light-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\dashboard-chart-bar-grouped-demo.js" />
+	  <None Include="wwwroot\js\charts\demos\dashboard-chart-bar-horizontal-demo.js" />
+	  <None Include="wwwroot\js\datatables\datatables-simple-demo.js" />
+	  <None Include="wwwroot\js\litepicker.js" />
+	  <None Include="wwwroot\js\material.js" />
+	  <None Include="wwwroot\js\prism.js" />
+	  <None Include="wwwroot\js\scripts.js" />
+	  <None Include="wwwroot\js\widgets\checklist.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="MailKit" Version="3.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />

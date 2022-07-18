@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,9 +16,9 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IBTLookUpService _lookUpService;
         private readonly IBTProjectService _projectService;
         private readonly IBTCompanyInfoService _companyInfoService;
@@ -25,7 +26,7 @@ namespace TheBugTracker.Controllers
         private readonly IBTRolesService _rolesService;
         private readonly IBTFileService _fileService;
 
-        public ProjectsController(ApplicationDbContext context, 
+        public ProjectsController(
                                   IBTLookUpService lookUpService, 
                                   IBTRolesService rolesService,
                                   IBTFileService fileService, 
@@ -34,7 +35,6 @@ namespace TheBugTracker.Controllers
                                   UserManager<BTUser> userManager
                                   )
         {
-            _context = context;
             _lookUpService = lookUpService;
             _rolesService = rolesService;
             _fileService = fileService;
@@ -44,11 +44,7 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Projects
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Projects.Include(p => p.Company).Include(p => p.ProjectPriority);
-            return View(await applicationDbContext.ToListAsync());
-        }
+       
 
         public async Task<IActionResult> MyProjects()
         {
@@ -69,7 +65,7 @@ namespace TheBugTracker.Controllers
             }
             else
             {
-                projects = await _projectService.GetAllProjectsByCompany(companyId);
+                projects = await _projectService.GetAllProjectsByCompanyAsync(companyId);
             }
 
             return View(projects);
@@ -86,6 +82,7 @@ namespace TheBugTracker.Controllers
             return View(archivedProjects);
         }
 
+        [Authorize(Roles = nameof(Roles.Admin))]
         public async Task<IActionResult> UnassignedProjects()
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -97,6 +94,7 @@ namespace TheBugTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = nameof(Roles.Admin))]
         public async Task<IActionResult> AssignPM(int projectId)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -114,6 +112,7 @@ namespace TheBugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = nameof(Roles.Admin))]
         public async Task<IActionResult> AssignPM(AssignPMViewModel model)
         {
             if (model.PMID != null)
@@ -127,6 +126,7 @@ namespace TheBugTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,ProjectManager")]
         public async Task<IActionResult> AssignMembers(int id)
         {
             ProjectMembersViewModel model = new();
@@ -150,6 +150,7 @@ namespace TheBugTracker.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
+        [Authorize(Roles = "Admin,ProjectManager")]
         public async Task<IActionResult> AssignMembers(ProjectMembersViewModel model)
         {
             if (model.SelectedUsers != null)
@@ -199,6 +200,8 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize(Roles = "Admin,ProjectManager")]
+
         public async Task<IActionResult> Create()
         {
             //Get company Id
@@ -219,6 +222,8 @@ namespace TheBugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,ProjectManager")]
+
         public async Task<IActionResult> Create(AddProjectWithPMViewModel model)
         {
             if (model != null)
@@ -262,6 +267,8 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin,ProjectManager")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -283,6 +290,8 @@ namespace TheBugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
+
         public async Task<IActionResult> Edit(AddProjectWithPMViewModel model)
         {
             
@@ -307,10 +316,17 @@ namespace TheBugTracker.Controllers
                     }
 
                 }
-                catch (Exception)
+                catch (DbUpdateConcurrencyException)
                 {
 
-                    throw;
+                    if (!await ProjectExists(model.Project.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
 
                 //TODO:  Redirect to ALL Projects
@@ -324,6 +340,8 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Projects/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
+
         public async Task<IActionResult> Archive(int? id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -346,6 +364,7 @@ namespace TheBugTracker.Controllers
         // POST: Projects/Archive/5
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -358,6 +377,8 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Projects/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
+
         public async Task<IActionResult> Restore(int? id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -380,6 +401,8 @@ namespace TheBugTracker.Controllers
         // POST: Projects/Restore/5
         [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
+
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
             int companyId = User.Identity.GetCompanyId().Value;
@@ -391,9 +414,11 @@ namespace TheBugTracker.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProjectExists(int id)
+        private async Task<bool> ProjectExists(int id)
         {
-            return _context.Projects.Any(e => e.Id == id);
+            int companyId = User.Identity.GetCompanyId().Value;
+
+            return (await _projectService.GetAllProjectsByCompanyAsync(companyId)).Any(p => p.Id == id);
         }
     }
 }

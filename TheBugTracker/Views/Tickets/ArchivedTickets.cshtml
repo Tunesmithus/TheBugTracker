@@ -16,104 +16,203 @@
 <h1>Archived Tickets</h1>
 
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Created)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Updated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Archived)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Project)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TicketStatus)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TicketPriority)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TicketType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OwnerUser)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeveloperUser)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Created)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Updated)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Archived)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Project.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TicketStatus.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TicketPriority.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TicketType.Name)
-                    </td>
-                    <td>
-                        @item.OwnerUser?.FullName
-                    </td>
-                    <td>
-                        @item.DeveloperUser?.FullName
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Hoverable Table</h4>
+                    <p class="card-description">
+                        Add class <code>.table-hover</code>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Created)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Updated)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Archived)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Project)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TicketStatus)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TicketPriority)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TicketType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OwnerUser)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DeveloperUser)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Created)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Updated)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Archived)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Project.Name)
+                                        </td>
+                                        @if (item.TicketStatus.Name == "New")
+                                        {
+                                            <td>
+                                                <span class="badge badge-success">@item.TicketStatus.Name</span>
 
-                        @if (User.IsInRole(Roles.Admin.ToString()) || await ProjectService.IsAssignedProjectManagerAsync(bTUser.Id, item.ProjectId))
-                        {
-                            <span>|</span>
-                            @if (item.Archived == false)
-                            {
-                                <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+                                            </td>
+                                        }
+                                        else if (item.TicketStatus.Name == "Development")
+                                        {
+                                            <td>
+                                                <span class="badge badge-warning">@item.TicketStatus.Name</span>
 
-                            }
-                            else
-                            {
-                                <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+                                            </td>
+                                        }
+                                        else if (item.TicketStatus.Name == "Testing")
+                                        {
+                                            <td>
+                                                <span class="badge badge-dark">@item.TicketStatus.Name</span>
 
-                            }
-                        }
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <span class="badge badge-success">@item.TicketStatus.Name</span>
+                                            </td>
+                                        }
 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                                        @if (item.TicketPriority.Name == "Low")
+                                        {
+                                            <td>
+                                                <span class="badge badge-success">@item.TicketPriority.Name</span>
+
+                                            </td>
+                                        }
+                                        else if (item.TicketPriority.Name == "Medium")
+                                        {
+                                            <td>
+                                                <span class="badge badge-outline-warning">@item.TicketPriority.Name</span>
+
+                                            </td>
+                                        }
+                                        else if (item.TicketPriority.Name == "High")
+                                        {
+                                            <td>
+                                                <span class="badge badge-danger">@item.TicketPriority.Name</span><i class=""></i>
+
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <span class="badge">@item.TicketPriority.Name</span>
+
+                                            </td>
+                                        }
+
+
+                                        @if (true)
+                                        {
+                                            <td>
+                                                @item.TicketType.Name
+                                            </td>
+                                        }
+
+
+                                        <td>
+                                            @item.OwnerUser?.FullName
+                                        </td>
+                                        <td>
+                                            @item.DeveloperUser?.FullName
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Options
+                                                </button>
+                                                <ul class="dropdown-menu float-end">
+                                                    <li><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+
+                                                    @if (User.IsInRole(Roles.Admin.ToString()) || await ProjectService.IsAssignedProjectManagerAsync(bTUser.Id, item.ProjectId))
+                                                    {
+                                                        @if (item.Archived == false)
+                                                        {
+                                                            <li>
+                                                                <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li>
+                                                                <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+                                                            </li>
+                                                        }
+
+
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                            @*<a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                                            @if (User.IsInRole(Roles.Admin.ToString()) || await ProjectService.IsAssignedProjectManagerAsync(bTUser.Id, item.ProjectId))
+                                            {
+                                                <span>|</span>
+                                                @if (item.Archived == false)
+                                                {
+                                                    <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+
+                                                }
+                                                else
+                                                {
+                                                    <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+
+                                                }
+                                            }*@
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

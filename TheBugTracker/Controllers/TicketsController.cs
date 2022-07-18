@@ -17,9 +17,10 @@ using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker.Controllers
 {
+
+    [Authorize]
     public class TicketsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IBTTicketService _ticketService;
         private readonly UserManager<BTUser> _userManager;
         private readonly IBTProjectService _projectService;
@@ -27,11 +28,11 @@ namespace TheBugTracker.Controllers
         private readonly IBTFileService _fileService;
         private readonly IBTTicketHistoryService _historyService;
 
-        public TicketsController(ApplicationDbContext context, IBTTicketService ticketService,
+        public TicketsController( IBTTicketService ticketService,
             UserManager<BTUser> userManager, IBTProjectService projectService,
             IBTLookUpService lookUpService, IBTFileService fileService, IBTTicketHistoryService historyService)
         {
-            _context = context;
+           
             _ticketService = ticketService;
             _userManager = userManager;
             _projectService = projectService;
@@ -41,11 +42,7 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Tickets
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Tickets.Include(t => t.DeveloperUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(await applicationDbContext.ToListAsync());
-        }
+       
 
         public async Task<IActionResult> MyTickets()
         {
@@ -191,6 +188,7 @@ namespace TheBugTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> AssignDeveloper(int id)
         {
             AssignDeveloperViewModel model = new();
@@ -205,6 +203,7 @@ namespace TheBugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> AssignDeveloper(AssignDeveloperViewModel model)
         {
             
@@ -262,7 +261,7 @@ namespace TheBugTracker.Controllers
 
             if (User.IsInRole(Roles.Admin.ToString()))
             {
-                ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompany(companyId), "Id", "Name");
+                ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompanyAsync(companyId), "Id", "Name");
             }
             else
             {
@@ -318,7 +317,7 @@ namespace TheBugTracker.Controllers
 
             if (User.IsInRole(Roles.Admin.ToString()))
             {
-                ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompany(bTUser.CompanyId), "Id", "Name");
+                ViewData["ProjectId"] = new SelectList(await _projectService.GetAllProjectsByCompanyAsync(bTUser.CompanyId), "Id", "Name");
             }
             else
             {
@@ -326,8 +325,8 @@ namespace TheBugTracker.Controllers
 
             }
 
-            ViewData["TicketPriorityId"] = new SelectList(_context.TicketPriorities, "Id", "Id", ticket.TicketPriorityId);
-            ViewData["TicketTypeId"] = new SelectList(_context.TicketTypes, "Id", "Id", ticket.TicketTypeId);
+            ViewData["TicketPriorityId"] = new SelectList(await _lookUpService.GetTicketPrioritiesAsync(), "Id", "Id", ticket.TicketPriorityId);
+            ViewData["TicketTypeId"] = new SelectList(await _lookUpService.GetTicketTypesAsync(), "Id", "Id", ticket.TicketTypeId);
             return View(ticket);
         }
 
@@ -409,6 +408,7 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Tickets/Archive/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> Archive(int? id)
         {
 
@@ -431,6 +431,7 @@ namespace TheBugTracker.Controllers
         // POST: Tickets/Archive/5
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> ArchiveConfirmed(int id)
         {
 
@@ -442,6 +443,7 @@ namespace TheBugTracker.Controllers
         }
 
         // GET: Tickets/Restore/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> Restore(int? id)
         {
 
@@ -463,6 +465,7 @@ namespace TheBugTracker.Controllers
         // POST: Tickets/Archive/5
         [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
 

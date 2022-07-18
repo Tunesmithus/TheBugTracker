@@ -17,7 +17,7 @@ namespace TheBugTracker.Models
 
         //Navigation Properties
 
-        [NotMapped]
+       
         public ICollection<BTUser> Members { get; set; }
         public ICollection<Project> Projects { get; set; }
 

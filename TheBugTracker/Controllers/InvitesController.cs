@@ -54,7 +54,7 @@ namespace TheBugTracker.Controllers
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
             ViewData["InviteeId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["InvitorId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name");
             return View();
         }
 

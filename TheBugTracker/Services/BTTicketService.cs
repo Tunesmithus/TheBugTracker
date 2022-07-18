@@ -392,16 +392,16 @@ namespace TheBugTracker.Services
             {
                 if (await _rolesService.IsUserInRoleAsync(user, Roles.Admin.ToString()))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(t => t.Tickets).ToList();
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId)).SelectMany(t => t.Tickets).ToList();
                 }
                 else if (await _rolesService.AddUserToRoleAsync(user, Roles.Developer.ToString()))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(t => t.Tickets)
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId)).SelectMany(t => t.Tickets)
                         .Where(t => t.DeveloperUserId == userId).ToList();
                 }
                 else if (await _rolesService.AddUserToRoleAsync(user, Roles.Submitter.ToString()))
                 {
-                    tickets = (await _projectService.GetAllProjectsByCompany(companyId)).SelectMany(t => t.Tickets)
+                    tickets = (await _projectService.GetAllProjectsByCompanyAsync(companyId)).SelectMany(t => t.Tickets)
                                                                                         .Where(t => t.OwnerUserId == userId)
                                                                                         .ToList();
                 }
