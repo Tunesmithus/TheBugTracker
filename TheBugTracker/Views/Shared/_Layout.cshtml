@@ -123,7 +123,7 @@
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="~/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../../images/favicon.png" />
 </head>
@@ -469,7 +469,7 @@
                     {
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" asp-controller="Home" asp-action="Dashboard">
                                 <i class="ti-dashboard menu-icon"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
@@ -487,12 +487,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-Projects" aria-expanded="false" aria-controls="ui-Projects">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#example1" aria-expanded="false" aria-controls="example1">
                                 <i class="ti-ruler-pencil menu-icon"></i>
                                 <span class="menu-title">Projects</span>
                                 <i class="menu-arrow"></i>
                             </a>
-                            <div class="collapse" id="ui-Projects">
+                            <div class="collapse" id="example1">
                                 <ul class="nav flex-column sub-menu">
                                     @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.ProjectManager.ToString()))
                                     {
@@ -516,12 +516,12 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-Tickets" aria-expanded="false" aria-controls="ui-Tickets">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#example2" aria-expanded="false" aria-controls="example2">
                                 <i class="ti-ticket menu-icon"></i>
                                 <span class="menu-title">Tickets</span>
                                 <i class="menu-arrow"></i>
                             </a>
-                            <div class="collapse" id="ui-Tickets">
+                            <div class="collapse" id="example2">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a class="nav-link" asp-controller="Tickets" asp-action="Create">New Ticket....</a></li>
 

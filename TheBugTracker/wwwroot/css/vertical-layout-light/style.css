@@ -28688,17 +28688,17 @@ div.tagsinput span.tag a {
 /* === Landing screens === */
 /* Auth */
 .auth .login-half-bg {
-  background: url("https://via.placeholder.com/1440x767");
-  background-size: cover;
+    background: url("https://images.unsplash.com/photo-1601342550634-ad1eefe53001?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
+    background-size: cover;
 }
 
 .auth .register-half-bg {
-  background: url("https://via.placeholder.com/735x767");
+  background: url("");
   background-size: cover;
 }
 
 .auth.lock-full-bg {
-  background: url("https://via.placeholder.com/1440x767");
+  background: url("");
   background-size: cover;
 }
 

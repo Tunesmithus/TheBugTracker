@@ -50,6 +50,11 @@ namespace TheBugTracker.Controllers
 
         }
 
+        public IActionResult DashboardAlt()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<JsonResult> GglProjectTickets()
         {

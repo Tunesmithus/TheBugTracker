@@ -4,20 +4,18 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Ticket</h4>
 
 <div class="content-wrapper">
     <div class="row">
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Basic form elements</h4>
+                    <h3>Create New Ticket</h3>
                     <p class="card-description">
-                        Basic form elements
+                        Create detailed ticket to be submitted to a developer to resolve the issue
                     </p>
-                    <form asp-action="Create">
+                    <form asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
@@ -48,11 +46,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                            <a class="btn btn-sm btn-warning"  asp-action="AllTickets">Back to List</a>
                         </div>
-                        <div>
-                            <a asp-action="AllTickets">Back to List</a>
-                        </div>
+                        
                     </form>
                 </div>
             </div>
