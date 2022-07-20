@@ -115,8 +115,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>JustDo Admin</title>
-    <!-- plugins:css -->
+    <title>@ViewData["Title"] - TheBugTracker</title>    <!-- plugins:css -->
     <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
@@ -256,7 +255,7 @@
                                 <i class="ti-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <i class="ti-power-off text-primary"></i>
                                 Logout
                             </a>
@@ -459,7 +458,6 @@
                         <div class="collapse" id="ui-LogIn">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Sign In</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Sign Out</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
                             </ul>
                         </div>
@@ -499,7 +497,7 @@
                                         <li class="nav-item"> <a class="nav-link" asp-controller="Projects" asp-action="Create">New Project...</a></li>
 
                                     }
-                                    @if (User.IsInRole(Roles.Admin.ToString()) == false)
+                                    @if (User.IsInRole(Roles.Admin.ToString()) == true)
                                     {
                                         <li class="nav-item"> <a class="nav-link" asp-controller="Projects" asp-action="MyProjects">My Projects</a></li>
 
@@ -525,7 +523,7 @@
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item"> <a class="nav-link" asp-controller="Tickets" asp-action="Create">New Ticket....</a></li>
 
-                                    @if (User.IsInRole(Roles.Admin.ToString()) != true)
+                                    @if (User.IsInRole(Roles.Admin.ToString()) == true)
                                     {
                                         <li class="nav-item"> <a class="nav-link" asp-controller="Tickets" asp-action="MyTickets">My Tickets</a></li>
 

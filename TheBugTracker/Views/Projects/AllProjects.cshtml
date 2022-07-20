@@ -14,130 +14,128 @@
 
 
 
+<div class="content-wrapper">
 
-
-
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h3>All Projects<span class="float-end"><a class="btn btn-primary btn-sm" asp-action="Create">Create New Project</a></span></h3>
-                        <p class="card-description">
-                            List Of All Projects.
-                        </p>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+    <div class="row">
+        <div class="col grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3>All Projects<span class="float-end"><a class="btn btn-primary btn-sm" asp-action="Create">Create New Project</a></span></h3>
+                    <p class="card-description">
+                        List Of All Projects.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ImageFileData)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ImageFileName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ImageContentType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Archived)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Company)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProjectPriority)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
                                     <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Name)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Description)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.StartDate)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.EndDate)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageFileData)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageFileName)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageContentType)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Archived)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Company)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ProjectPriority)
-                                        </th>
-                                        <th></th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndDate)
+                                        </td>
+                                        <td>
+                                            @if (item.ImageFileData != null)
+                                            {
+                                                <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(item.ImageFileData))" />
+
+                                            }
+                                            @* @Html.DisplayFor(modelItem => item.ImageFileData) *@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ImageFileName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ImageContentType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Archived)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Company.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+
+                                            @{
+
+                                                bool isProjectPM = (await ProjectService.GetProjectManagerAsync(item.Id))?.Id == bTUser.Id;
+
+                                            }
+
+                                            @if (User.IsInRole(Roles.Admin.ToString()) || isProjectPM)
+                                            {
+
+                                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                                                @if (item.Archived != true)
+                                                {
+
+                                                    <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+
+                                                }
+                                            }
+
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StartDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.EndDate)
-                                            </td>
-                                            <td>
-                                                @if (item.ImageFileData != null)
-                                                {
-                                                    <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(item.ImageFileData))" />
-
-                                                }
-                                                @* @Html.DisplayFor(modelItem => item.ImageFileData) *@
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ImageFileName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ImageContentType)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Archived)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Company.Id)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-
-                                                @{
-
-                                                    bool isProjectPM = (await ProjectService.GetProjectManagerAsync(item.Id))?.Id == bTUser.Id;
-
-                                                }
-
-                                                @if (User.IsInRole(Roles.Admin.ToString()) || isProjectPM)
-                                                {
-
-                                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-
-                                                    @if (item.Archived != true)
-                                                    { 
-
-                                                        <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
-
-                                                    }
-                                                }
-
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
