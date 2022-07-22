@@ -54,10 +54,10 @@
                             @*Title of Ticket*@
                             <h5>@Model.Title</h5>
                             @*Description of Ticket*@
-                            <p>@Model.Description</p>
+                            <p><strong>Description:</strong> @Model.Description</p>
                             
                             <div class="progress-container progress-info m-b-25">
-                                <span class="progress-badge" style="font-size:small">Project Status</span>
+                                <span class="progress-badge" style="font-size:small"><strong>Project Status</strong></span>
                                 <div class="">
                                     @* Razor code block *@
                                     @{
@@ -194,7 +194,7 @@
 
         <div class="col-md-4 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body bg-secondary" style="overflow-y: auto; height: 300px">
+                <div class="card-body" style="overflow-y: auto; height: 300px">
                     <h4 class="mb-3">Ticket History</h4>
                     <ul class="bullet-line-list">
 

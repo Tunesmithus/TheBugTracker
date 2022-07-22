@@ -105,7 +105,7 @@
 
 
                 </div>
-		    </div>
+            </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
             <div class="card">
@@ -197,8 +197,37 @@
 
                                         <td><span style="font-size:small">@member.FullName</span></td>
                                         <td><span style="font-size:small">@member.Projects?.Count()</span></td>
-                                        <td class="text-danger"><span style="font-size:small">Get User Role!!!</span></td>
+                                        <td>
 
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Admin.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge bg-danger rounded-pill">Administrator</span>
+
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Developer.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-success">Developer</span>
+
+                                            }
+                                           
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Submitter.ToString()))
+                                            {
+                                                <span style="font-size:small"class="badge rounded-pill bg-dark">Submitter</span>
+
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.DemoUser.ToString()))
+                                            {
+                                                <span style="font-size:small">Demo User</span>
+
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.ProjectManager.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-warning">Project Manager</span>
+
+                                            }
+
+
+                                        </td>
                                     </tr>
                                 }
 
@@ -212,7 +241,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>Projects</h4>
-                    <div  class="table-responsive" style="overflow-y:auto;height:600px;">
+                    <div class="table-responsive" style="overflow-y:auto;height:600px;">
                         <table class="table table-hover">
                             <thead class="bg-dark text-white">
                                 <tr>
@@ -304,7 +333,7 @@
                                         <td><span class="badge bg-dark">@ticket.TicketPriority.Name </span></td>
                                         <td><span style="font-size:small">@ticket.Created.ToString("MM-dd-yyyy")</span></td>
                                         <td>
-                                            <a  asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-3 bi-journal-richtext"></i></a>
+                                            <a asp-action="Details" asp-controller="Tickets" asp-route-id="@ticket.Id"><i class="fs-3 bi-journal-richtext"></i></a>
 
                                         </td>
                                     </tr>
