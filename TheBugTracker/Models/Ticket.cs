@@ -60,8 +60,12 @@ namespace TheBugTracker.Models
         public virtual TicketPriority TicketPriority { get; set; }
         public virtual TicketType TicketType { get; set; }
 
-        
+        [DisplayName("Owner")]
+
         public virtual BTUser OwnerUser { get; set; }
+
+        [DisplayName("Developer")]
+
         public virtual BTUser DeveloperUser { get; set; }
 
         //Collection
