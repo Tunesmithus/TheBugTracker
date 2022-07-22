@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] - TheBugTracker</title>    <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
@@ -142,6 +143,7 @@
                         </div>
                     </li>
                     <li class="nav-item nav-profile dropdown">
+
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             <img src="https://via.placeholder.com/40x40" alt="profile" />
                         </a>
@@ -342,7 +344,7 @@
             <!-- partial -->
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                
+
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-LogIn" aria-expanded="false" aria-controls="ui-LogIn">
@@ -360,9 +362,9 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        
+
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Dashboard">
+                            <a class="nav-link" asp-controller="Home" asp-action="DashboardAlt">
                                 <i class="ti-dashboard menu-icon"></i>
                                 <span class="menu-title">Dashboard</span>
                             </a>
@@ -444,7 +446,7 @@
                         </li>
                     }
                 </ul>
-                
+
             </nav>
             <!-- partial -->
             <div class="main-panel">
@@ -476,6 +478,8 @@
     <script src="../../js/template.js"></script>
     <script src="../../js/settings.js"></script>
     <script src="../../js/todolist.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="~/js/data-table.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="../../js/dashboard.js"></script>

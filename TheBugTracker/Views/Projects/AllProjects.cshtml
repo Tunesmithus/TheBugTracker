@@ -15,6 +15,68 @@
 
 
 <div class="content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Total Tickets by Project</h4>
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">Avg. Session</p>
+                                <p class="text-muted">max: 40</p>
+                            </div>
+                            <div class="progress progress-md">
+                                <div class="progress-bar bg-info w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Status: Open</h4>
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">Avg. Session</p>
+                                <p class="text-muted">max: 120</p>
+                            </div>
+                            <div class="progress progress-md">
+                                <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Status: Development</h4>
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">Avg. Session</p>
+                                <p class="text-muted">max: 54</p>
+                            </div>
+                            <div class="progress progress-md">
+                                <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-xl-3 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Status: Closed</h4>
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">Avg. Session</p>
+                                <p class="text-muted">max: 143</p>
+                            </div>
+                            <div class="progress progress-md">
+                                <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col grid-margin stretch-card">
@@ -43,12 +105,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.ImageFileData)
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.ImageFileName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.ImageContentType)
-                                    </th>
+                                   
                                     <th>
                                         @Html.DisplayNameFor(model => model.Archived)
                                     </th>
@@ -68,7 +125,7 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
-                                        <td>
+                                        <td class="text-wrap">
                                             @Html.DisplayFor(modelItem => item.Description)
                                         </td>
                                         <td>
@@ -80,22 +137,17 @@
                                         <td>
                                             @if (item.ImageFileData != null)
                                             {
-                                                <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(item.ImageFileData))" />
+                                                <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:50px" src="data:image/*;base64,@(Convert.ToBase64String(item.ImageFileData))" />
 
                                             }
                                             @* @Html.DisplayFor(modelItem => item.ImageFileData) *@
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ImageFileName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ImageContentType)
-                                        </td>
+                                        
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Archived)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Company.Id)
+                                            @Html.DisplayFor(modelItem => item.Company.Name)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ProjectPriority.Name)

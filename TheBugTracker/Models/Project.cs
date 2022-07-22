@@ -15,6 +15,7 @@ namespace TheBugTracker.Models
 
         public int? CompanyId { get; set; }
 
+
         public int? ProjectPriorityId { get; set; }
 
         [DisplayName("Project Name")]
@@ -35,6 +36,7 @@ namespace TheBugTracker.Models
         [NotMapped]
         public IFormFile ImageFormFile { get; set; }
 
+        [DisplayName("Image")]
 
         public byte[] ImageFileData { get; set; }
 
@@ -49,7 +51,10 @@ namespace TheBugTracker.Models
 
 
         //Navigation Properties
-        public Company Company { get; set; } 
+        public Company Company { get; set; }
+
+        [DisplayName("Priority")]
+
         public ProjectPriority ProjectPriority { get; set; }
         public ICollection<BTUser> Members {get; set;}
         public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();

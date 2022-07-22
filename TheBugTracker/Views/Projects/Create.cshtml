@@ -20,7 +20,6 @@
                     <form asp-action="Create" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
                         <div class="form-group">
                             <label asp-for="Project.Name" class="control-label"></label>
                             <input type="text" asp-for="Project.Name" class="form-control" />
@@ -44,7 +43,7 @@
 
                         <div class="form-group">
                             <label class="control-label">Choose A Priority</label>
-                            <select asp-for="Project.ProjectPriorityId" class="form-control" asp-items="@Model.PriorityList">
+                            <select asp-for="Project.ProjectPriorityId" class="form-select" asp-items="@Model.PriorityList">
                                 <option disabled selected>Choose Priority</option>
                             </select>
                         </div>
@@ -75,7 +74,7 @@
                             *@
                             <div class="form-group">
                                 <label class="control-label">Project Manager</label>
-                                <select asp-for="PmId" class="form-control" asp-items="@Model.PMList">
+                                <select asp-for="PmId" class="form-select" asp-items="@Model.PMList">
                                     <option selected disabled>Choose Project Manager</option>
                                     <option></option>
                                 </select>
@@ -89,7 +88,7 @@
                         *@
                         <div class="form-group">
                             <label class="control-label">Project Manager</label>
-                            <select asp-for="PmId" class="form-control" asp-items="@Model.PMList">
+                            <select asp-for="PmId" class="form-select" asp-items="@Model.PMList">
                                 <option selected disabled>Choose Project Manager</option>
                                 <option></option>
                             </select>

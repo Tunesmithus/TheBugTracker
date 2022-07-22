@@ -258,5 +258,184 @@
         </div>
     </div>
 </div>
+<div class="content-wrapper">
+
+    <div class="row">
+        <div class="col-lg-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card">
+                        <h4 class="card-header bg-info text-white">Ticket Description</h4>
+                        <div class="card-body">
+                            <form method="post">
+                                <input hidden />
+
+                                <h2></h2>
+
+                                <p></p>
+                                <div class="form-group">
+                                    <label class="control-label">Select Project Manager</label>
+                                    <select class="form-select mb-3">
+                                        <option disabled selected>Select</option>
+                                    </select>
+                                    <input type="submit" value="Assign" class="btn btn-sm btn-primary" />
+                                    <a asp-action="UnassignedProjects" class="btn btn-warning btn-sm">Back To List</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card">
+                        <h4 class="card-header bg-info text-white"> Ticket Details</h4>
+                        <div class="card-body">
+                            <form method="post" asp-action="AssignPM" asp-controller="Projects">
+                                <input hidden />
+
+                                <h2></h2>
+
+                                <p></p>
+                                <div class="form-group">
+                                    <label class="control-label">Select Project Manager</label>
+                                    <select class="form-select mb-3">
+                                        <option disabled selected>Select</option>
+                                    </select>
+                                    <input type="submit" value="Assign" class="btn btn-sm btn-primary" />
+                                    <a asp-action="UnassignedProjects" class="btn btn-warning btn-sm">Back To List</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card">
+                        <h4 class="card-header bg-info text-white">Comments</h4>
+                        <div class="card-body">
+                            <div class="profile-feed">
+                                <div class="d-flex align-items-start profile-feed-item">
+                                    <img src="https://via.placeholder.com/92x92" alt="profile" class="img-sm rounded-circle" />
+                                    <div class="ms-4">
+                                        <h6>
+                                            Mason Beck
+                                            <small class="ms-4 text-muted"><i class="ti-time me-1"></i>10 hours</small>
+                                        </h6>
+                                        <p>
+                                            There is no better advertisement campaign that is low cost and also successful at the same time.
+                                        </p>
+                                        <p class="small text-muted mt-2 mb-0">
+                                            <span>
+                                                <i class="ti-star me-1"></i>4
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-comment me-1"></i>11
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-share"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start profile-feed-item">
+                                    <img src="https://via.placeholder.com/92x92" alt="profile" class="img-sm rounded-circle" />
+                                    <div class="ms-4">
+                                        <h6>
+                                            Willie Stanley
+                                            <small class="ms-4 text-muted"><i class="ti-time me-1"></i>10 hours</small>
+                                        </h6>
+                                        <img src="https://via.placeholder.com/640x385" alt="sample" class="rounded mw-100" />
+                                        <p class="small text-muted mt-2 mb-0">
+                                            <span>
+                                                <i class="ti-star me-1"></i>4
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-comment me-1"></i>11
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-share"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start profile-feed-item">
+                                    <img src="https://via.placeholder.com/92x92" alt="profile" class="img-sm rounded-circle" />
+                                    <div class="ms-4">
+                                        <h6>
+                                            Dylan Silva
+                                            <small class="ms-4 text-muted"><i class="ti-time me-1"></i>10 hours</small>
+                                        </h6>
+                                        <p>
+                                            When I first got into the online advertising business, I was looking for the magical combination
+                                            that would put my website into the top search engine rankings
+                                        </p>
+                                        <img src="https://via.placeholder.com/640x385" alt="sample" class="rounded mw-100" />
+                                        <p class="small text-muted mt-2 mb-0">
+                                            <span>
+                                                <i class="ti-star me-1"></i>4
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-comment me-1"></i>11
+                                            </span>
+                                            <span class="ms-2">
+                                                <i class="ti-share"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Updates</h4>
+                    <ul class="bullet-line-list">
+                        <li>
+                            <h6>User confirmation</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing </p>
+                            <p class="text-muted mb-4">
+                                <i class="ti-time"></i>
+                                7 months ago.
+                            </p>
+                        </li>
+                        <li>
+                            <h6>Continuous evaluation</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing </p>
+                            <p class="text-muted mb-4">
+                                <i class="ti-time"></i>
+                                7 months ago.
+                            </p>
+                        </li>
+                        <li>
+                            <h6>Promotion</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing </p>
+                            <p class="text-muted">
+                                <i class="ti-time"></i>
+                                7 months ago.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
 
 

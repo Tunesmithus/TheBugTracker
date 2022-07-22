@@ -71,7 +71,7 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -91,7 +91,8 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
                     UserName = Input.Email, 
                     Email = Input.Email, 
                     FirstName = Input.FirstName, 
-                    LastName = Input.LastName 
+                    LastName = Input.LastName
+                   
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
