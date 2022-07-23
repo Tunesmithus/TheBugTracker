@@ -51,9 +51,9 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            <a class="text-dark" asp-controller="Projects" asp-action="Details" asp-route-id="@item.Id"><strong>@item.Name</strong></a>
                                         </td>
-                                        <td>
+                                        <td class="text-wrap">
                                             @Html.DisplayFor(modelItem => item.Description)
                                         </td>
                                         <td>

@@ -123,7 +123,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            <a asp-controller="Projects" asp-action="Details" asp-route-id ="@item.Id" class="text-dark"><strong>@item.Name</strong></a>
                                         </td>
                                         <td class="text-wrap">
                                             @Html.DisplayFor(modelItem => item.Description)

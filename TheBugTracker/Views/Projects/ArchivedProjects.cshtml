@@ -46,9 +46,7 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.ImageFileName)
                                         </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ImageContentType)
-                                        </th>
+                                        
                                         <th>
                                             @Html.DisplayNameFor(model => model.Archived)
                                         </th>
@@ -66,7 +64,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                <a class="text-dark" asp-controller="Projects" asp-action="Details" asp-route-id="@item.Id"><strong>@item.Name</strong></a>
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Description)
@@ -88,9 +86,7 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.ImageFileName)
                                             </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ImageContentType)
-                                            </td>
+                                            
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Archived)
                                             </td>
@@ -101,7 +97,7 @@
                                                 @Html.DisplayFor(modelItem => item.ProjectPriority.Name)
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                                <a class="btn btn-sm btn-warning" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-circle"></i></a> |
 
                                                 @{
 
@@ -113,17 +109,18 @@
                                                 @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.ProjectManager.ToString()))
                                                 {
 
-                                                    <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                                    <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-fill"></i></a>
 
 
                                                     @if (item.Archived != true)
                                                     {
-
-                                                        <a asp-action="Archive" asp-route-id="@item.Id">Archive</a>
+                                                        <span>|</span>
+                                                        <a  class="btn btn-sm btn-sucess" asp-action="Archive" asp-route-id="@item.Id"><i class="bi bi-folder2-open"></i></a>
                                                     }
                                                     else
                                                     {
-                                                        <a class="btn btn-sm btn-danger" asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+                                                        <span>|</span>
+                                                        <a class="btn btn-sm btn-outline-danger" asp-action="Restore" asp-route-id="@item.Id"><i class="bi bi-arrow-clockwise"></i></a>
 
                                                     }
 

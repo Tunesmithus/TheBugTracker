@@ -24,8 +24,8 @@
                     <p class="card-description">
                         List Of Archived Tickets
                     </p>
-                    <div class="table-responsive">
-                        <table class="table">
+                    <div class="table-responsive" style="overflow-y:auto;height:600px;">
+                        <table class="table" >
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th>
@@ -61,7 +61,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.DeveloperUser)
                                     </th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Title)
+                                            <a class="text-dark" asp-controller="Tickets" asp-action="Details" asp-route-id="@item.Id"><strong>@item.Title</strong></a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Description)
@@ -160,11 +160,11 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                     Options
                                                 </button>
-                                                <ul class="dropdown-menu float-end">
-                                                    <li><a asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="mx-3" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
 
                                                     @if (User.IsInRole(Roles.Admin.ToString()) || await ProjectService.IsAssignedProjectManagerAsync(bTUser.Id, item.ProjectId))
                                                     {
@@ -177,7 +177,7 @@
                                                         else
                                                         {
                                                             <li>
-                                                                <a asp-action="Restore" asp-route-id="@item.Id">Restore</a>
+                                                                <a class="mx-3" asp-action="Restore" asp-route-id="@item.Id">Restore</a>
                                                             </li>
                                                         }
 

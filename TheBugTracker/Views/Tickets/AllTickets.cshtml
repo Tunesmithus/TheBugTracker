@@ -124,7 +124,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.DeveloperUser)
                                     </th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -132,7 +132,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Title)
+                                            <a class="text-dark" asp-controller="" asp-action="Details" asp-route-id="@item.Id"><strong>@item.Title</strong></a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Description)

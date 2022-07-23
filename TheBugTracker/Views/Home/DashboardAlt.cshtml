@@ -181,54 +181,54 @@
 
                                 @foreach (var member in Model.Members)
                                 {
-                                    <tr>
-                                        <td>
-                                            @if (member.AvatarFileData != null)
-                                            {
-                                                <span><img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarFileData))" /></span>
+                                <tr>
+                                    <td>
+                                        @if (member.AvatarFileData != null)
+                                        {
+                                            <span><img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarFileData))" /></span>
 
-                                            }
-                                            else
-                                            {
-                                                <span><img src="https://via.placeholder.com/36x36" alt="image" /></span>
+                                        }
+                                        else
+                                        {
+                                            <span><img src="https://via.placeholder.com/36x36" alt="image" /></span>
 
-                                            }
-                                        </td>
+                                        }
+                                    </td>
 
-                                        <td><span style="font-size:small">@member.FullName</span></td>
-                                        <td><span style="font-size:small">@member.Projects?.Count()</span></td>
-                                        <td>
+                                    <td><a href="#" class="text-black" ><span style="font-size:small"><strong>@member.FullName</strong></span></a></td>
+                                    <td><span style="font-size:small">@member.Projects?.Count()</span></td>
+                                    <td>
 
-                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Admin.ToString()))
-                                            {
-                                                <span style="font-size:small" class="badge bg-danger rounded-pill">Administrator</span>
+                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Admin.ToString()))
+                                        {
+                                            <span style="font-size:small" class="badge bg-danger rounded-pill">Administrator</span>
 
-                                            }
-                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Developer.ToString()))
-                                            {
-                                                <span style="font-size:small" class="badge rounded-pill bg-success">Developer</span>
+                                        }
+                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Developer.ToString()))
+                                        {
+                                            <span style="font-size:small" class="badge rounded-pill bg-success">Developer</span>
 
-                                            }
-                                           
-                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Submitter.ToString()))
-                                            {
-                                                <span style="font-size:small"class="badge rounded-pill bg-dark">Submitter</span>
+                                        }
 
-                                            }
-                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.DemoUser.ToString()))
-                                            {
-                                                <span style="font-size:small">Demo User</span>
+                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Submitter.ToString()))
+                                        {
+                                            <span style="font-size:small" class="badge rounded-pill bg-dark">Submitter</span>
 
-                                            }
-                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.ProjectManager.ToString()))
-                                            {
-                                                <span style="font-size:small" class="badge rounded-pill bg-warning">Project Manager</span>
+                                        }
+                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.DemoUser.ToString()))
+                                        {
+                                            <span style="font-size:small" class="badge rounded-pill bg-secondary">Demo User</span>
 
-                                            }
+                                        }
+                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.ProjectManager.ToString()))
+                                        {
+                                            <span style="font-size:small" class="badge rounded-pill bg-warning">Project Manager</span>
+
+                                        }
 
 
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 }
 
                             </tbody>
