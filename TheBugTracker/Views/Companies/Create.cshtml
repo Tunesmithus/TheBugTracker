@@ -20,18 +20,18 @@
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label asp-for="Name" class="control-label"></label>
+                            <label asp-for="Name" class="control-label"><strong>Name</strong></label>
                             <input asp-for="Name" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Description" class="control-label"></label>
-                            <input asp-for="Description" class="form-control" />
+                            <label asp-for="Description" class="control-label"><strong>Description</strong></label>
+                            <textarea asp-for="Description" class="form-control" ></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Create" class="btn btn-primary btn-sm" />
-                            <a class="btn btn-warning btn-sm"  asp-action="Index">Back to List</a>
+                            <a class="btn btn-warning btn-sm" asp-action="Index">Back to List</a>
                         </div>
                     </form>
                 </div>
@@ -45,4 +45,17 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+<script>
+
+
+    $('#Description').summernote({
+        placeholder: 'Description',
+        tabsize: 2,
+        height: 200
+    });
+</script>
+
+
 }

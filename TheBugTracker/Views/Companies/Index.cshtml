@@ -14,7 +14,7 @@
                     <p class="card-description">
                         List Of All Companies
                     </p>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-y:auto;height:600px;">
                         <table class="table table-hover">
                             <thead class="bg-dark text-white">
                                 <tr>
@@ -34,7 +34,7 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
-                                        <td>
+                                        <td class="text-wrap">
                                             @Html.DisplayFor(modelItem => item.Description)
                                         </td>
                                         <td>

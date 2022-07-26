@@ -1,84 +1,44 @@
 ﻿@page
 @model RegisterModel
 @{ ViewData["Title"] = "Register";
-                Layout = "~/Views/Shared/_RegisterFullPartial.cshtml"; }
+    Layout = "~/Views/Shared/_RegisterFullPartial.cshtml"; }
 
 
 
 
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="content-wrapper d-flex align-items-center auth px-0 bg-dark">
             <div class="row w-100 mx-0">
                 <div class="col-lg-5 mx-auto">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <div class="brand-logo">
-                            <img src="../../../../images/logo.svg" alt="logo">
+                        <div class="brand-logo mb-3 text-center">
+                            <img src="~/img/LoginRegisterLogo.png" />
+                            @*<img src="../../../../images/logo.svg" alt="logo">*@
                         </div>
                         <h4>New here?</h4>
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                         <form class="pt-3" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
-                                <div asp-validation-summary="All" class="text-danger"></div>
-                                <label asp-for="Input.FirstName"></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-transparent">
-                                        <span class="input-group-text bg-transparent border-right-0">
-                                            <i class="ti-user text-primary"></i>
-                                        </span>
-                                    </div>
-                                    <input asp-for="Input.FirstName" type="text" class="form-control form-control-lg border-left-0" placeholder="First Name">
-                                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                                </div>
+                                <input type="text" class="form-control form-control-lg" asp-for="Input.FirstName" placeholder="First Name">
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.LastName"></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-transparent">
-                                        <span class="input-group-text bg-transparent border-right-0">
-                                            <i class="ti-user text-primary"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" asp-for="Input.LastName" class="form-control form-control-lg border-left-0" placeholder="Last Name">
-                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-
-                                </div>
+                                <input type="text" class="form-control form-control-lg" asp-for="Input.LastName" placeholder="Last Name">
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input"></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-transparent">
-                                        <span class="input-group-text bg-transparent border-right-0">
-                                            <i class="ti-email text-primary"></i>
-                                        </span>
-                                    </div>
-                                    <input type="email" asp-for="Input.Email" class="form-control form-control-lg border-left-0" placeholder="Email">
-                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                                </div>
+                                <input type="email" class="form-control form-control-lg" asp-for="Input.Email" placeholder="Email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.Password"></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-transparent">
-                                        <span class="input-group-text bg-transparent border-right-0">
-                                            <i class="ti-lock text-primary"></i>
-                                        </span>
-                                    </div>
-                                    <input asp-for="Input.Password" type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password">
-                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                                </div>
+                                <input type="password" class="form-control form-control-lg" asp-for="Input.Password" placeholder="Password">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.ConfirmPassword"></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-transparent">
-                                        <span class="input-group-text bg-transparent border-right-0">
-                                            <i class="ti-lock text-primary"></i>
-                                        </span>
-                                    </div>
-                                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Confirm Password">
-                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                                </div>
+                                <input type="password" class="form-control form-control-lg" asp-for="Input.ConfirmPassword" placeholder="Confirm Password">
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
 
                             <div class="mb-4">
@@ -98,7 +58,7 @@
                         </form>
                     </div>
                 </div>
-           </div>
+            </div>
         </div>
         <!-- content-wrapper ends -->
     </div>

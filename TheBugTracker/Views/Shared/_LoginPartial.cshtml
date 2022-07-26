@@ -7,40 +7,39 @@
     BTUser bTUser = await UserManager.GetUserAsync(User);
 }
 
-<div class="dropdown py-sm-2 ms-auto ms-sm-0 flex-shrink-1">
 
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" width="28" height="28" class="rounded-circle">
-            <span class="d-none d-sm-inline mx-1">@bTUser.FullName</span>
+@if (SignInManager.IsSignedIn(User))
+{
+    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="Profile" width="28" height="28" class="rounded-circle"><span class="d-none d-sm-inline mx-1">@bTUser.FullName</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+        <a class="dropdown-item">
+            <i class="ti-settings text-primary"></i>
+            Settings
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit();">Sign out</a></li>
-        </ul>
-
-    }
-    else
-    {
-        <a asp-area="Identity" asp-page="/Account/Login" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" width="28" height="28" class="rounded-circle">
-            <span class="d-none d-sm-inline mx-1">Log In</span>
+        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <i class="ti-power-off text-primary"></i>
+            Logout
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Sign In</a></li>
-        </ul>
-    }
-</div>
-<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-</form>
+    </div>
+}
+else
+{
+    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="Profile" width="28" height="28" class="rounded-circle">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+        <a class="dropdown-item">
+            <i class="ti-settings text-primary"></i>
+            Settings
+        </a>
+        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">
+            <i class="ti-power-off text-primary"></i>
+            Sign In
+        </a>
+    </div>
+}
 
 
 

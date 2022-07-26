@@ -18,38 +18,38 @@
                     <form asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
+                            <label asp-for="Title" class="control-label"><b>Title</b></label>
                             <input asp-for="Title" class="form-control" />
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Description" class="control-label"></label>
-                            <textarea asp-for="Description" class="form-control" ></textarea>
+                            <label asp-for="Description" class="control-label"><b>Description</b></label>
+                            <textarea asp-for="Description" rows="5" class="form-control" id="Description"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="ProjectId" class="control-label"></label>
+                            <label asp-for="ProjectId" class="control-label"><b>Project</b></label>
                             <select asp-for="ProjectId" class="form-select" asp-items="ViewBag.ProjectId">
                                 <option disabled selected>Select Project</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label asp-for="TicketTypeId" class="control-label"></label>
+                            <label asp-for="TicketTypeId" class="control-label"><b>Ticket Type</b></label>
                             <select asp-for="TicketTypeId" class="form-select" asp-items="ViewBag.TicketTypeId">
                                 <option disabled selected>Select Ticket Type</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label asp-for="TicketPriorityId" class="control-label"></label>
+                            <label asp-for="TicketPriorityId" class="control-label"><b>Ticket Priority</b></label>
                             <select asp-for="TicketPriorityId" class="form-select" asp-items="ViewBag.TicketPriorityId">
                                 <option disabled selected>Select Ticket Priority</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
-                            <a class="btn btn-sm btn-warning"  asp-action="AllTickets">Back to List</a>
+                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" /> |
+                            <a class="btn btn-sm btn-warning" asp-action="AllTickets">Back to List</a>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -60,4 +60,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+    $('#Description').summernote({
+        placeholder: 'Description',
+        tabsize: 2,
+        height: 200
+    });
+    </script>
 }

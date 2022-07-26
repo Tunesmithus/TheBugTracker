@@ -71,6 +71,8 @@ namespace TheBugTracker.Controllers
 
         }
 
+       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddTicketComment([Bind("Id,TicketId,Comment")] TicketComment ticketComment)

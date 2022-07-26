@@ -12,6 +12,7 @@
     ViewData["Title"] = "Details";
     BTUser bTUser = await UserManager.GetUserAsync(User);
     BTUser projectManager = await ProjectService.GetProjectManagerAsync(Model.ProjectId);
+    TicketAttachment ticketAttachment = new();
 
 }
 
@@ -69,7 +70,7 @@
                                     @if (percent <= .25)
                                     {
                                         <div class="progress progress-lg">
-                                            <div class="progress-bar bg-danger " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: @percent%">
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: @percent%">
                                                 <span class="progress-value">@percent%</span>
                                             </div>
                                         </div>
@@ -247,16 +248,16 @@
                                     <div>
                                         <form asp-action="AddTicketAttachment" asp-controller="Tickets" enctype="multipart/form-data" method="post">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <input type="hidden" asp-for="@Model.Id" name="TicketId">
+                                            <input type="hidden" asp-for="@Model.Id" name="TicketId" />
 
                                             <div class="media-body ml-3">
                                                 <label>
                                                     <strong>Description</strong>
-                                                    <input asp-for="@Model.Attachments.FirstOrDefault().Description" type="text" class="form-control mt-2" />
+                                                    <input asp-for="@(ticketAttachment.Description)" type="text" class="form-control mt-2" />
                                                 </label><br />
                                                 <div class="mt-3">
                                                     <label class="btn btn-outline-primary btn-sm">
-                                                        <input asp-for="@Model.Attachments.FirstOrDefault().FormFile" type="file" class="form-control-file" />
+                                                        <input asp-for="@(ticketAttachment.FormFile)" type="file" class="form-control-file" />
                                                     </label>
                                                     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                                 </div>

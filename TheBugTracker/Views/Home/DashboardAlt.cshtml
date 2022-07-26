@@ -14,6 +14,17 @@
 }
 
 <div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="row">
+                <div class="col-12 col-xl-5 mb-4 mb-xl-0">
+                    <h4 class="font-weight-bold">Hi, Welcomeback!</h4>
+                    <h4 class="font-weight-normal mb-0">@bTUser.FullName</h4>
+                </div>
+               
+            </div>
+        </div>
+    </div>
     <!--*****Pills*****-->
     <div class="row">
         <div class="col-md-3 grid-margin stretch-card">
@@ -71,7 +82,7 @@
                 <div class="card-body">
                     <h4 class="mb-3 text-center">Project Details</h4>
                     <div class="d-flex align-items-center pb-3 border-bottom">
-                        <i class="bi bi-ticket-perforated-fill"></i>
+                        <i class="bi bi-ticket-perforated-fill icon-md"></i>
                         <div class="ms-3">
                             <h6 class="mb-1">New Tickets</h6>
                             <small class="text-muted mb-0"><strong>@Model.Tickets.Where(t => t.TicketStatus.Name == BTTicketStatus.New.ToString()).Count()</strong></small>
@@ -79,7 +90,7 @@
                         <p class="font-weight-bold ms-auto px-1 py-1 text-info mdi-24px"></p>
                     </div>
                     <div class="d-flex align-items-center py-3 border-bottom">
-                        <i class="ti-user icon-md"></i>
+                        <i class="bi bi-hourglass-top icon-md"></i>
                         <div class="ms-3">
                             <h6 class="mb-1">In Testing</h6>
                             <small class="text-muted mb-0"><strong>@Model.Tickets.Where(t => t.TicketStatus.Name == BTTicketStatus.Testing.ToString()).Count()</strong></small>
@@ -87,7 +98,7 @@
                         <p class="font-weight-bold ms-auto px-1 py-1 text-info mdi-24px"></p>
                     </div>
                     <div class="d-flex align-items-center py-3 border-bottom">
-                        <i class="ti-arrow-up icon-md"></i>
+                        <i class="bi bi-rulers icon-md"></i>
                         <div class="ms-3">
                             <h6 class="mb-1">Tickets In Development</h6>
                             <small class="text-muted mb-0">@Model.Tickets.Where(t => t.TicketStatus.Name == BTTicketStatus.Development.ToString()).Count()</small>
@@ -95,7 +106,7 @@
                         <p class="font-weight-bold ms-auto px-1 py-1 text-info mdi-24px"></p>
                     </div>
                     <div class="d-flex align-items-center py-3 border-bottom">
-                        <i class="ti-user icon-md"></i>
+                        <i class="bi bi-person-workspace icon-md"></i>
                         <div class="ms-3">
                             <h6 class="mb-1">Total Developers</h6>
                             <small class="text-muted mb-0"></small>
@@ -181,54 +192,54 @@
 
                                 @foreach (var member in Model.Members)
                                 {
-                                <tr>
-                                    <td>
-                                        @if (member.AvatarFileData != null)
-                                        {
-                                            <span><img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarFileData))" /></span>
+                                    <tr>
+                                        <td>
+                                            @if (member.AvatarFileData != null)
+                                            {
+                                                <span><img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(member.AvatarFileData))" /></span>
 
-                                        }
-                                        else
-                                        {
-                                            <span><img src="https://via.placeholder.com/36x36" alt="image" /></span>
+                                            }
+                                            else
+                                            {
+                                                <span><img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="image" /></span>
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td><a href="#" class="text-black" ><span style="font-size:small"><strong>@member.FullName</strong></span></a></td>
-                                    <td><span style="font-size:small">@member.Projects?.Count()</span></td>
-                                    <td>
+                                        <td><a href="#" class="text-black"><span style="font-size:small"><strong>@member.FullName</strong></span></a></td>
+                                        <td><span style="font-size:small">@member.Projects?.Count()</span></td>
+                                        <td>
 
-                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Admin.ToString()))
-                                        {
-                                            <span style="font-size:small" class="badge bg-danger rounded-pill">Administrator</span>
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Admin.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge bg-danger rounded-pill">Administrator</span>
 
-                                        }
-                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Developer.ToString()))
-                                        {
-                                            <span style="font-size:small" class="badge rounded-pill bg-success">Developer</span>
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Developer.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-success">Developer</span>
 
-                                        }
+                                            }
 
-                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.Submitter.ToString()))
-                                        {
-                                            <span style="font-size:small" class="badge rounded-pill bg-dark">Submitter</span>
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.Submitter.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-dark">Submitter</span>
 
-                                        }
-                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.DemoUser.ToString()))
-                                        {
-                                            <span style="font-size:small" class="badge rounded-pill bg-secondary">Demo User</span>
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.DemoUser.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-secondary">Demo User</span>
 
-                                        }
-                                        @if (await RolesService.IsUserInRoleAsync(member, Roles.ProjectManager.ToString()))
-                                        {
-                                            <span style="font-size:small" class="badge rounded-pill bg-warning">Project Manager</span>
+                                            }
+                                            @if (await RolesService.IsUserInRoleAsync(member, Roles.ProjectManager.ToString()))
+                                            {
+                                                <span style="font-size:small" class="badge rounded-pill bg-warning">Project Manager</span>
 
-                                        }
+                                            }
 
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 }
 
                             </tbody>

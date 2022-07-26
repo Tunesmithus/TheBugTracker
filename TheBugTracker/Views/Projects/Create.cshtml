@@ -21,43 +21,43 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="form-group">
-                            <label asp-for="Project.Name" class="control-label"></label>
+                            <label asp-for="Project.Name" class="control-label"><b>Name</b></label>
                             <input type="text" asp-for="Project.Name" class="form-control" />
                             <span asp-validation-for="Project.Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Project.Description" class="control-label"></label>
-                            <textarea type="text" asp-for="Project.Description" class="form-control" ><</textarea>
+                            <label asp-for="Project.Description" class="control-label"><b>Description</b></label>
+                            <textarea type="text" rows="5" asp-for="Project.Description" id="Description" class="form-control"></textarea>
                             <span asp-validation-for="Project.Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Project.StartDate" class="control-label"></label>
+                            <label asp-for="Project.StartDate" class="control-label"><b>Start Date</b></label>
                             <input type="date" asp-for="Project.StartDate" class="form-control" />
                             <span asp-validation-for="Project.StartDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Project.EndDate" class="control-label"></label>
+                            <label asp-for="Project.EndDate" class="control-label"><b>End Date</b></label>
                             <input type="date" asp-for="Project.EndDate" class="form-control" />
                             <span asp-validation-for="Project.EndDate" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Choose A Priority</label>
+                            <label class="control-label"><b>Choose A Priority</b></label>
                             <select asp-for="Project.ProjectPriorityId" class="form-select" asp-items="@Model.PriorityList">
                                 <option disabled selected>Choose Priority</option>
                             </select>
                         </div>
                         @*
-            Set up image capture
+                            Set up image capture
                         *@
                         <div class="form-group">
-                            <label class="control-label">Project Image</label>
+                            <label class="control-label"><b>Project Image</b></label>
                             <input asp-for="Project.ImageFormFile" class="form-control" type="file" accept=".png,.jpg,.jpeg,.gif"
                                    onchange="document.getElementById('imageFileData').src=window.URL.createObjectURL(this.files[0])" />
 
                             <span asp-validation-for="Project.ImageFormFile" class="text-danger"></span>
                         </div>
-                        <label> Image Preview </label>
+                        <label><b>Image Preview</b></label>
                         @if (Model.Project?.ImageFileData != null)
                         {
                             <img id="imageFileData" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(Model.Project.ImageFileData))" />
@@ -70,10 +70,10 @@
                         @if (User.IsInRole(Roles.Admin.ToString()))
                         {
                             @*
-                Fix up PM select list
+                                Fix up PM select list
                             *@
-                            <div class="form-group">
-                                <label class="control-label">Project Manager</label>
+                            <div class="form-group mt-3">
+                                <label class="control-label"><b>Project Manager</b></label>
                                 <select asp-for="PmId" class="form-select" asp-items="@Model.PMList">
                                     <option selected disabled>Choose Project Manager</option>
                                     <option></option>
@@ -81,23 +81,6 @@
                             </div>
                         }
 
-
-
-                        @*
-            Fix up PM select list
-                        *@
-                        <div class="form-group">
-                            <label class="control-label">Project Manager</label>
-                            <select asp-for="PmId" class="form-select" asp-items="@Model.PMList">
-                                <option selected disabled>Choose Project Manager</option>
-                                <option></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-sm btn-primary" />
-                            <a class="btn btn-sm btn-warning" asp-action="AllProjects">Back to List</a>
-
-                        </div>
                     </form>
                 </div>
             </div>
@@ -109,4 +92,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#Description').summernote({
+            placeholder: 'Description',
+            tabsize: 2,
+            height: 200
+        });
+    </script>
+
 }
