@@ -54,6 +54,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="wwwroot\IndexPage\fonts\fontawesome-webfont.svg" />
+	  <None Include="wwwroot\IndexPage\fonts\fontawesome-webfont.woff2" />
+	  <None Include="wwwroot\IndexPage\js\bootstrap.min.js" />
+	  <None Include="wwwroot\IndexPage\js\custom.js" />
+	  <None Include="wwwroot\IndexPage\js\jquery.js" />
+	  <None Include="wwwroot\IndexPage\js\jquery.singlePageNav.min.js" />
+	  <None Include="wwwroot\IndexPage\js\wow.min.js" />
 	  <None Include="wwwroot\js\charts\chart-defaults.js" />
 	  <None Include="wwwroot\js\charts\demos\chart-area-demo.js" />
 	  <None Include="wwwroot\js\charts\demos\chart-area-smooth-demo.js" />
