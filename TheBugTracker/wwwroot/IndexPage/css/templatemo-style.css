@@ -6,6 +6,10 @@ http://www.templatemo.com/tm-446-boxer
 
 */
 
+strong {
+    font-weight: bold;
+}
+
 body
     {
         background: #fff;
@@ -454,4 +458,6 @@ footer
             padding-bottom: 40px;
         }
 }
+
+
 /* end media 360 */
