@@ -41,7 +41,7 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string user)
         {
 
-            string returnUrl = "~/Home/Dashboard";
+            string returnUrl = "~/Home/DashboardAlt";
             string email = "";
             string password = "";
 
@@ -49,6 +49,8 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
             {
                 email = _config["DemoLogin:DemoAdminUsername"];
                 password = _config["DemoLogin:DemoAdminPassword"];
+
+
             }
             else if(user == "pm")
             {
@@ -59,6 +61,8 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
             {
                 email = _config["DemoLogin:DemoDeveloperUsername"];
                 password = _config["DemoLogin:DemoDeveloperPassword"];
+               
+                
             }
 
             else if (user == "submitter")

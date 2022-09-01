@@ -18,36 +18,43 @@
                         </div>
                         <h4>Hello! let's get started</h4>
                         <h6 class="font-weight-light">Please Choose a Demo Account</h6>
-                        <div class="row">
-                            <div class="col-3">
+                        <div class="row text-center">
+                            <div class="col">
                                 <form class="pt-3" id="account" method="post">
                                     <div class="my-2">
-                                        <button type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i>Admin</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-3">
-                                <form class="pt-3" id="account" method="post">
-                                    <div class="my-2">
-                                        <button type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i>Manager</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-3">
-                                <form class="pt-3" id="account" method="post">
-                                    <div class="my-2">
-                                        <button type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i>Developer</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-3">
-                                <form class="pt-3" id="account" method="post">
-                                    <div class="my-2">
-                                        <button type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i>Submitter</button>
+                                        <button asp-route-user="admin" type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i> Admin</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <form class="pt-3" id="account" method="post">
+                                    <div class="my-2">
+                                        <button asp-route-user ="pm" type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i> Project Manager</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <form class="pt-3" id="account" method="post">
+                                    <div class="my-2">
+                                        <button asp-route-user ="dev" type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i> Developer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <form class="pt-3" id="account" method="post">
+                                    <div class="my-2">
+                                        <button asp-route-user ="submitter" type="submit" class="btn btn-block btn-dark btn-sm font-weight-medium auth-form-btn"><i class="bi bi-door-open"></i> Submitter</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
 
                     </div>
                 </div>
